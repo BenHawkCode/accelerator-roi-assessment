@@ -191,7 +191,7 @@
 
 <nav>
     <div class="nav-inner">
-        <a href="https://thecoachconsultant.uk" class="nav-logo">THE COACH <span>CONSULTANT</span></a>
+        <a href="https://thecoachconsultant.uk" class="nav-logo"><img src="https://raw.githubusercontent.com/BenHawkCode/The-Coach-Consultant-/main/additional-ip/assets/logo/logo-white.png" alt="The Coach Consultant" style="height:40px;"></a>
     </div>
 </nav>
 
@@ -304,12 +304,12 @@ const questions = [
         { score: 4, label: "5-6 times per week, mostly consistent" },
         { score: 5, label: "6+ times per week with a clear content calendar" }
     ]},
-    { category: "Content Strategy", section: 1, text: "Are you using the 50/50 content split - half pain-point content, half expertise content?", options: [
+    { category: "Content Strategy", section: 1, text: "Are you using the 50/50 content split - half pain-point content, half personal brand content?", options: [
         { score: 1, label: "I have no content strategy, I post whatever comes to mind" },
-        { score: 2, label: "Mostly value/tips content that rarely addresses pain points" },
-        { score: 3, label: "Some pain-point content but it is not balanced or intentional" },
-        { score: 4, label: "Roughly 50/50 split with a weekly content plan" },
-        { score: 5, label: "Disciplined 50/50 split with pre-built content banks I pull from weekly" }
+        { score: 2, label: "Mostly generic tips and value content with no personal brand or pain focus" },
+        { score: 3, label: "Some pain-point content but my personal brand (story, behind-the-scenes, opinions) is missing" },
+        { score: 4, label: "Roughly 50/50 split between pain content and personal brand with a weekly plan" },
+        { score: 5, label: "Disciplined 50/50 split with pre-built banks for both pain and personal brand topics" }
     ]},
     { category: "Content Strategy", section: 1, text: "Are you using AI tools (Claude, ChatGPT) to speed up your content creation?", options: [
         { score: 1, label: "No, I do everything manually from scratch" },
@@ -574,7 +574,7 @@ function showResults() {
         { q: 24, t: 3, p: "high", title: "Set Your Income Target and Daily Non-Negotiables", desc: "Without exact numbers, you cannot measure ROI. Reverse-engineer your monthly target into daily conversations, calls, and clients needed.", tag: "Quick Win", tagC: "tag-quick", doc: "Doc 01" },
         { q: 8, t: 3, p: "high", title: "Create a Lead Magnet", desc: "Build a free PDF, checklist, or template that solves one specific problem. Put it in your link in bio and promote weekly. This captures leads on autopilot.", tag: "This Week", tagC: "tag-medium", doc: "Docs 07 + 21" },
         { q: 9, t: 3, p: "high", title: "Set Up Your Email System (FloDesk)", desc: "Email converts 3-5x better than social DMs. Set up automated delivery and a 5-email welcome sequence. Takes 60 minutes.", tag: "This Week", tagC: "tag-medium", doc: "Doc 08" },
-        { q: 5, t: 3, p: "high", title: "Implement the 50/50 Content Split", desc: "50% pain-point content + 50% expertise content. Build content banks of 15 pain points and 15 knowledge topics. Never run out of post ideas again.", tag: "This Week", tagC: "tag-medium", doc: "Doc 03" },
+        { q: 5, t: 3, p: "high", title: "Implement the 50/50 Content Split", desc: "50% pain-point content + 50% personal brand content. Build banks of 15 pain points and 15 personal brand topics (your story, behind-the-scenes, opinions, client wins). No more generic value dumps.", tag: "This Week", tagC: "tag-medium", doc: "Doc 03" },
         { q: 6, t: 3, p: "medium", title: "Start Using AI for Content Creation", desc: "Train Claude or ChatGPT on your voice and use 5 daily prompts. Cuts content creation from 3 hours to 30 minutes. Reclaim 10+ hours per week for selling.", tag: "This Week", tagC: "tag-medium", doc: "Doc 02" },
         { q: 12, t: 3, p: "high", title: "Implement Daily DM Outreach", desc: "10 new outbound DMs + 5 follow-ups + all inbound, every day. Use proven scripts for cold, warm, and follow-up sequences. This is the #1 revenue activity.", tag: "This Week", tagC: "tag-medium", doc: "Doc 11" },
         { q: 13, t: 3, p: "medium", title: "Build Your DM Script Library", desc: "You need proven scripts for new followers, content engagers, lead magnet downloaders, follow-ups (Day 3, 7, 14), and call booking transitions.", tag: "This Week", tagC: "tag-medium", doc: "Doc 11" },
@@ -588,7 +588,7 @@ function showResults() {
         { q: 21, t: 3, p: "medium", title: "Post Client Case Studies Regularly", desc: "Structure as Problem then Proof. Use 5-7 slide story sequences with poll stickers. DM every 'Yes' responder. 3-10 conversations per case study.", tag: "This Week", tagC: "tag-medium", doc: "Doc 10" },
         { q: 23, t: 3, p: "medium", title: "Set Up Lead Tracking", desc: "Create a Google Sheet with 8 columns. Colour-code pipeline stages. Update daily, review every Friday. The coaches who track consistently outperform by 2-3x.", tag: "This Week", tagC: "tag-medium", doc: "Doc 15" },
         { q: 10, t: 3, p: "high", title: "Follow Up With Every Single Lead", desc: "Automated email sequence PLUS personal DM within 24 hours. The lead magnet opens the door. The follow-up is where the sale starts.", tag: "This Week", tagC: "tag-medium", doc: "Doc 14" },
-        { q: 4, t: 3, p: "medium", title: "Increase Posting Consistency", desc: "6 posts per week using the content calendar: Mon/Wed/Sat = pain-point, Tue/Thu/Sun = expertise. Pull from your pre-built content banks.", tag: "This Week", tagC: "tag-medium", doc: "Doc 03" },
+        { q: 4, t: 3, p: "medium", title: "Increase Posting Consistency", desc: "6 posts per week using the content calendar: Mon/Wed/Sat = pain-point, Tue/Thu/Sun = personal brand. Pull from your pre-built content banks.", tag: "This Week", tagC: "tag-medium", doc: "Doc 03" },
         { q: 7, t: 3, p: "medium", title: "Improve Your Hooks and CTAs", desc: "Every post needs a scroll-stopping first line and a clear action at the end. Use the hook templates and always end with DM me [KEYWORD] or link in bio.", tag: "This Week", tagC: "tag-medium", doc: "Doc 03" },
         { q: 0, t: 3, p: "medium", title: "Upgrade Your Profile Photo", desc: "Get a clear, high-quality, professional photo that builds instant trust. This is the first thing every prospect sees.", tag: "Quick Win", tagC: "tag-quick", doc: "Doc 05" },
         { q: 3, t: 3, p: "medium", title: "Organise Your Story Highlights", desc: "Create highlights for: Results, About Me, How I Help, FAQs, Free Guide. These pre-sell prospects before they ever DM you.", tag: "Quick Win", tagC: "tag-quick", doc: "Doc 05" },
@@ -638,7 +638,7 @@ function generateSprintPlan() {
 
     // WEEK 1 — Content Engine + DM System
     if (weak(6, 3)) week1Tasks.push({ title: "Set up AI tools and train on your voice", desc: "Create Claude/ChatGPT accounts. Train on 3-5 examples of your writing. Set up daily 20-minute workflow.", doc: "Doc 02", time: "20 min" });
-    if (weak(5, 3)) week1Tasks.push({ title: "Build your content banks (50/50 split)", desc: "15 pain points + 15 knowledge topics. Map your 6-day weekly content calendar.", doc: "Doc 03", time: "30 min" });
+    if (weak(5, 3)) week1Tasks.push({ title: "Build your content banks (50/50 split)", desc: "15 pain points + 15 personal brand topics (story, behind-the-scenes, opinions, client wins). Map your 6-day weekly calendar.", doc: "Doc 03", time: "30 min" });
     if (weak(7, 3)) week1Tasks.push({ title: "Write hooks and CTAs for this week's posts", desc: "Use the hook templates. Every post opens with a scroll-stopper and ends with a specific CTA.", doc: "Doc 03", time: "15 min" });
     if (weak(12, 3)) week1Tasks.push({ title: "Start daily DM outreach", desc: "10 new outbound + 5 follow-ups + all inbound. Use the cold and warm DM scripts.", doc: "Doc 11", time: "30 min/day" });
     if (weak(13, 3)) week1Tasks.push({ title: "Save your DM scripts for quick access", desc: "Cold openers, warm follow-ups, Day 3/7/14 sequences, and call booking transition.", doc: "Doc 11", time: "15 min" });
