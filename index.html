@@ -137,6 +137,30 @@
         .tag-medium { background: rgba(240,160,48,0.1); color: var(--amber); }
         .tag-doc { background: rgba(107,155,155,0.1); color: var(--teal); }
 
+        /* Sprint Plan */
+        .sprint-plan { margin-bottom: 32px; }
+        .sprint-plan h2 { font-size: 24px; font-weight: 800; margin-bottom: 6px; animation: fadeInUp 0.5s ease 0.4s both; }
+        .sprint-plan .sprint-subtitle { font-size: 14px; color: var(--muted); margin-bottom: 24px; animation: fadeInUp 0.5s ease 0.45s both; }
+        .sprint-week { margin-bottom: 20px; animation: fadeInUp 0.4s ease both; }
+        .sprint-week-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .sprint-week-badge { background: var(--teal); color: white; padding: 6px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+        .sprint-week-badge.day1 { background: var(--red-pain); }
+        .sprint-week-badge.w1 { background: var(--amber); }
+        .sprint-week-badge.w2 { background: var(--teal); }
+        .sprint-week-badge.w3 { background: var(--teal-dark); }
+        .sprint-week-badge.w4 { background: var(--dark-grey); }
+        .sprint-week-title { font-size: 16px; font-weight: 700; color: var(--dark-grey); }
+        .sprint-tasks { display: grid; gap: 8px; }
+        .sprint-task { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: var(--white); border: 1px solid var(--light-grey); border-radius: 12px; transition: all 0.2s; }
+        .sprint-task:hover { border-color: var(--teal); transform: translateX(4px); }
+        .sprint-check { width: 22px; height: 22px; border: 2px solid var(--light-grey); border-radius: 50%; flex-shrink: 0; margin-top: 2px; }
+        .sprint-task-content { flex: 1; }
+        .sprint-task-title { font-size: 14px; font-weight: 600; color: var(--dark-grey); }
+        .sprint-task-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
+        .sprint-task-doc { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 50px; background: rgba(107,155,155,0.1); color: var(--teal); margin-top: 4px; }
+        .sprint-task-time { font-size: 11px; color: var(--amber); font-weight: 600; margin-left: 6px; }
+        .sprint-divider { height: 1px; background: var(--light-grey); margin: 24px 0; }
+
         .results-cta { background: linear-gradient(135deg, var(--dark-grey) 0%, var(--mid-grey) 100%); border-radius: 20px; padding: 48px 32px; text-align: center; animation: fadeInUp 0.5s ease 0.5s both; }
         .results-cta h2 { font-size: 28px; font-weight: 800; color: white; margin-bottom: 12px; }
         .results-cta p { font-size: 16px; color: rgba(255,255,255,0.7); max-width: 500px; margin: 0 auto 24px; }
@@ -221,6 +245,12 @@
             <p class="rec-subtitle">These are ranked by speed to revenue. Start at #1 and work down.</p>
             <div id="recCards"></div>
         </div>
+        <div class="sprint-plan" id="sprintPlan">
+            <h2>Your Personalised 30-Day Sprint Plan</h2>
+            <p class="sprint-subtitle">Based on your scores, here is your custom implementation order. Follow it day by day for fastest ROI.</p>
+            <div id="sprintContent"></div>
+        </div>
+
         <div class="results-cta">
             <h2>Want Help Implementing This?</h2>
             <p>Book a free discovery call and I will walk you through exactly how to fix your weakest areas and start generating revenue within 30 days.</p>
@@ -583,7 +613,97 @@ function showResults() {
     });
     if (recs.length === 0) recHTML = '<div class="rec-card"><div class="rec-content"><h3>You are crushing it!</h3><p>Your business is performing well across all areas. Focus on consistency and scaling what is already working.</p></div></div>';
     document.getElementById('recCards').innerHTML = recHTML;
+
+    // ── PERSONALISED 30-DAY SPRINT PLAN ──
+    generateSprintPlan();
 }
+
+function generateSprintPlan() {
+    const weak = (q, threshold) => (answers[q] || 0) <= threshold;
+
+    // Build task pool - ordered by speed to cash within each phase
+    const day1Tasks = [];
+    const week1Tasks = [];
+    const week2Tasks = [];
+    const week3Tasks = [];
+    const week4Tasks = [];
+
+    // DAY 1 — Immediate Cash (always show reactivation if weak, plus foundations)
+    if (weak(21, 3)) day1Tasks.push({ title: "Run your reactivation campaign", desc: "Message every past client who has not booked in 60+ days. This is the fastest money in the entire accelerator.", doc: "Doc 06", time: "60 min" });
+    if (weak(24, 3)) day1Tasks.push({ title: "Set your 30-day income target", desc: "Reverse-engineer your monthly target into daily conversations, calls, and clients needed. Pin your daily non-negotiables.", doc: "Doc 01", time: "30 min" });
+    if (weak(1, 3)) day1Tasks.push({ title: "Rewrite your bio", desc: "Who you help + what result + CTA. Takes 10 minutes and changes your conversion rate immediately.", doc: "Doc 05", time: "10 min" });
+    if (weak(2, 3)) day1Tasks.push({ title: "Fix your link in bio", desc: "Point it to a lead capture page (opt-in form or booking page), not your homepage.", doc: "Doc 05", time: "10 min" });
+    if (weak(0, 3)) day1Tasks.push({ title: "Upgrade your profile photo", desc: "Clear, professional, on-brand. First thing every prospect sees.", doc: "Doc 05", time: "15 min" });
+    if (weak(3, 3)) day1Tasks.push({ title: "Organise your story highlights", desc: "Create: Results, About Me, How I Help, FAQs, Free Guide.", doc: "Doc 05", time: "20 min" });
+
+    // WEEK 1 — Content Engine + DM System
+    if (weak(6, 3)) week1Tasks.push({ title: "Set up AI tools and train on your voice", desc: "Create Claude/ChatGPT accounts. Train on 3-5 examples of your writing. Set up daily 20-minute workflow.", doc: "Doc 02", time: "20 min" });
+    if (weak(5, 3)) week1Tasks.push({ title: "Build your content banks (50/50 split)", desc: "15 pain points + 15 knowledge topics. Map your 6-day weekly content calendar.", doc: "Doc 03", time: "30 min" });
+    if (weak(7, 3)) week1Tasks.push({ title: "Write hooks and CTAs for this week's posts", desc: "Use the hook templates. Every post opens with a scroll-stopper and ends with a specific CTA.", doc: "Doc 03", time: "15 min" });
+    if (weak(12, 3)) week1Tasks.push({ title: "Start daily DM outreach", desc: "10 new outbound + 5 follow-ups + all inbound. Use the cold and warm DM scripts.", doc: "Doc 11", time: "30 min/day" });
+    if (weak(13, 3)) week1Tasks.push({ title: "Save your DM scripts for quick access", desc: "Cold openers, warm follow-ups, Day 3/7/14 sequences, and call booking transition.", doc: "Doc 11", time: "15 min" });
+    if (weak(23, 3)) week1Tasks.push({ title: "Create your lead tracking sheet", desc: "Google Sheet with 8 columns. Colour-code pipeline stages. Start tracking every conversation.", doc: "Doc 15", time: "15 min" });
+
+    // WEEK 2 — Lead Capture + Sales System
+    if (weak(8, 3)) week2Tasks.push({ title: "Create your lead magnet", desc: "PDF guide, checklist, or template that solves one specific problem. Use AI to draft content.", doc: "Docs 07 + 21", time: "2-3 hrs" });
+    if (weak(9, 3)) week2Tasks.push({ title: "Set up FloDesk with automated delivery", desc: "Opt-in form, automated lead magnet delivery, and 5-email welcome sequence.", doc: "Doc 08", time: "60 min" });
+    if (weak(10, 3)) week2Tasks.push({ title: "Launch your lead magnet (7-day push)", desc: "3-day tease, launch day sequence, daily promotion for 7 days, DM follow-up with downloaders.", doc: "Doc 14", time: "15 min/day" });
+    if (weak(16, 3)) week2Tasks.push({ title: "Build your sales call framework", desc: "Memorise the 7-step structure: Opening, Discovery (5 questions), Bridge, Pitch, Close, Objections, Follow-Up.", doc: "Doc 12", time: "30 min" });
+    if (weak(17, 3)) week2Tasks.push({ title: "Restructure your pricing", desc: "Calculate true value (1:3 rule). Write your anchor script. Set up PIF bonus + payment plan.", doc: "Doc 13", time: "20 min" });
+    if (weak(14, 3)) week2Tasks.push({ title: "Activate Instagram Stories as a DM engine", desc: "5-10 stories daily with polls, questions, quizzes. DM every responder within 2 hours.", doc: "Doc 17", time: "15 min/day" });
+
+    // WEEK 3 — Conversion + Social Proof
+    if (weak(18, 3)) week3Tasks.push({ title: "Create pre-frame content for your top 5 objections", desc: "One post per objection. Schedule 2-3x per week. Build a Results/Proof highlight.", doc: "Doc 19", time: "60 min" });
+    if (weak(20, 3)) week3Tasks.push({ title: "Launch your referral system", desc: "24-hour referral request after every great session. Mutual incentive. Set up Friday check-in.", doc: "Doc 09", time: "15 min" });
+    if (weak(22, 3)) week3Tasks.push({ title: "Create and post your first client case study", desc: "Permission DM, problem post, proof post, 5-7 slide story with poll sticker. DM every Yes responder.", doc: "Doc 10", time: "20 min" });
+    if (weak(11, 3)) week3Tasks.push({ title: "Increase call booking rate", desc: "Use the call booking transition script in every engaged conversation. Offer specific times.", doc: "Doc 12", time: "Ongoing" });
+
+    // WEEK 4 — Scale + Compound
+    if (weak(15, 3)) week4Tasks.push({ title: "Set up your monthly DM flywheel", desc: "4-week rotation: reactivation, story selling, engagement blitz, close. Daily targets and Friday close-outs.", doc: "Doc 18", time: "30 min" });
+    if (weak(19, 3)) week4Tasks.push({ title: "Plan and run your first urgency campaign", desc: "Choose a deadline mechanism. Execute the 7-day campaign with DMs, stories, and emails.", doc: "Doc 20", time: "7 days" });
+    // Always add these to week 4 as ongoing habits
+    week4Tasks.push({ title: "Run your first end-of-month referral campaign", desc: "Message all active clients with spaces available for next month. Track results.", doc: "Doc 09", time: "30 min" });
+    week4Tasks.push({ title: "Complete your first monthly pipeline review", desc: "Total leads, response rate, call booking rate, close rate, revenue. Compare and adjust.", doc: "Doc 15", time: "30 min" });
+
+    // Render
+    let html = '';
+    const phases = [
+        { tasks: day1Tasks, badge: "day1", badgeText: "Day 1", title: "Immediate Cash + Quick Wins", delay: 0.1 },
+        { tasks: week1Tasks, badge: "w1", badgeText: "Week 1", title: "Content Engine + DM System", delay: 0.2 },
+        { tasks: week2Tasks, badge: "w2", badgeText: "Week 2", title: "Lead Capture + Sales System", delay: 0.3 },
+        { tasks: week3Tasks, badge: "w3", badgeText: "Week 3", title: "Conversion + Social Proof", delay: 0.4 },
+        { tasks: week4Tasks, badge: "w4", badgeText: "Week 4", title: "Scale + Compound", delay: 0.5 }
+    ];
+
+    phases.forEach(phase => {
+        if (phase.tasks.length === 0) return;
+        html += `
+        <div class="sprint-week" style="animation-delay:${phase.delay}s">
+            <div class="sprint-week-header">
+                <span class="sprint-week-badge ${phase.badge}">${phase.badgeText}</span>
+                <span class="sprint-week-title">${phase.title}</span>
+            </div>
+            <div class="sprint-tasks">
+                ${phase.tasks.map(t => `
+                <div class="sprint-task">
+                    <div class="sprint-check"></div>
+                    <div class="sprint-task-content">
+                        <div class="sprint-task-title">${t.title}</div>
+                        <div class="sprint-task-desc">${t.desc}</div>
+                        <span class="sprint-task-doc">${t.doc}</span>
+                        <span class="sprint-task-time">${t.time}</span>
+                    </div>
+                </div>`).join('')}
+            </div>
+        </div>
+        <div class="sprint-divider"></div>`;
+    });
+
+    if (html === '') {
+        html = '<div class="sprint-task"><div class="sprint-task-content"><div class="sprint-task-title">You are already running a strong system.</div><div class="sprint-task-desc">Focus on consistency, scaling what works, and running monthly urgency campaigns for cash injections.</div></div></div>';
+    }
+
+    document.getElementById('sprintContent').innerHTML = html;
 
 renderQuestions();
 </script>
